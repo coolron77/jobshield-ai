@@ -1,0 +1,25 @@
+# Minimal local Supabase configuration (Supabase CLI fills in defaults for
+# everything not listed). Used by `supabase start` for development and e2e tests.
+project_id = "jobshield-ai"
+
+[api]
+port = 54321
+
+[db]
+port = 54322
+
+[studio]
+port = 54323
+
+[auth]
+site_url = "http://127.0.0.1:3000"
+additional_redirect_urls = [
+  "http://127.0.0.1:3000/auth/callback",
+  "http://localhost:3000/auth/callback",
+  "http://127.0.0.1:3100/auth/callback",
+]
+
+[auth.email]
+enable_signup = true
+# Local only — production projects should require confirmation (Dashboard → Auth → Providers → Email).
+enable_confirmations = false

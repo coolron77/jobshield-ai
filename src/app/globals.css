@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/*
+ * JobShield design tokens: light background, navy text, blue accent,
+ * restrained green / amber / orange / red status colours (all ≥ 4.5:1 for text).
+ */
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-ink: #0f1b3d;
+  --color-ink-soft: #3b4766;
+  --color-muted: #5b6684;
+  --color-line: #e3e8f2;
+  --color-surface: #ffffff;
+  --color-canvas: #f6f8fc;
+
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe7ff;
+  --color-brand-200: #bcd2ff;
+  --color-brand-500: #2f6bea;
+  --color-brand-600: #1f57d6;
+  --color-brand-700: #1946b0;
+  --color-brand-800: #163a8d;
+
+  --color-risk-low: #146c43;
+  --color-risk-low-bg: #e8f6ee;
+  --color-risk-medium: #8a5300;
+  --color-risk-medium-bg: #fff5e0;
+  --color-risk-high: #b23c00;
+  --color-risk-high-bg: #fff0e6;
+  --color-risk-critical: #b4232c;
+  --color-risk-critical-bg: #fdecee;
+
+  --shadow-card: 0 1px 2px rgb(15 27 61 / 0.04), 0 4px 16px rgb(15 27 61 / 0.06);
+  --radius-card: 1rem;
+}
+
+@layer base {
+  html {
+    color: var(--color-ink);
+    background: var(--color-canvas);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-brand-100);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .mark-low { background: #d6f0e1; box-shadow: inset 0 -2px 0 var(--color-risk-low); }
+  .mark-medium { background: #ffe9b8; box-shadow: inset 0 -2px 0 var(--color-risk-medium); }
+  .mark-high { background: #ffd9c2; box-shadow: inset 0 -2px 0 var(--color-risk-high); }
+  .mark-critical { background: #fbd0d4; box-shadow: inset 0 -2px 0 var(--color-risk-critical); }
+}
+
+/* Print-friendly reports */
+@media print {
+  @page { margin: 16mm; }
+  html, body { background: #fff !important; }
+  .no-print, header[data-site-header], nav[data-app-nav], footer[data-site-footer] { display: none !important; }
+  .print-break-avoid { break-inside: avoid; }
+  main { padding: 0 !important; }
+  a { color: inherit; text-decoration: none; }
+  [data-card] { box-shadow: none !important; border-color: #ccc !important; }
+}
